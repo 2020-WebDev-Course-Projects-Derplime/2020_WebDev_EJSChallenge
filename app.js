@@ -20,19 +20,26 @@ app.use(express.static("public"));
 const posts = [];
 
 app.get("/", (req, res) => {
-  res.render("home", { homeParagraph: homeStartingContent });  
+  res.render("home", {
+    homeParagraph: homeStartingContent,
+    list: posts
+  });
 });
 
 app.get("/about", (req, res) => {
-  res.render("about", { aboutParagraph: aboutContent });  
+  res.render("about", {
+    aboutParagraph: aboutContent
+  });
 });
 
 app.get("/contact", (req, res) => {
-  res.render("contact", { contactParagraph: contactContent });  
+  res.render("contact", {
+    contactParagraph: contactContent
+  });
 });
 
 app.get("/compose", (req, res) => {
-  res.render("compose");  
+  res.render("compose");
 });
 
 app.post("/compose", (req, res) => {
@@ -45,7 +52,14 @@ app.post("/compose", (req, res) => {
   res.redirect("/");
 });
 
+app.get("/posts/:postName", (req, res) => {
 
+  posts.forEach(post => {
+    if (req.params.postName === post.title) {
+      console.log("Match Found!");
+    }
+  });
+});
 
 
 
