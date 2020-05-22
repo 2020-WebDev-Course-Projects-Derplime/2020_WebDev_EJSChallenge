@@ -17,6 +17,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static("public"));
 
+const posts = [];
+
 app.get("/", (req, res) => {
   res.render("home", { homeParagraph: homeStartingContent });  
 });
@@ -34,11 +36,13 @@ app.get("/compose", (req, res) => {
 });
 
 app.post("/compose", (req, res) => {
-
   const post = {
     title: req.body.postTitle,
     content: req.body.postBody
   }
+
+  posts.push(post);
+  res.redirect("/");
 });
 
 
